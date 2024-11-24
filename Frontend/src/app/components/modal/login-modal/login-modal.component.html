@@ -1,0 +1,72 @@
+<!-- login-modal.component.html -->
+<div
+  class="modal fade"
+  id="loginModal"
+  tabindex="-1"
+  aria-labelledby="loginModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content modal-custom-width">
+      <div class="modal-header border-0 d-flex justify-content-center">
+        <h5 class="modal-title mx-auto" id="loginModalLabel">Bienvenido</h5>
+        <button
+          type="button"
+          class="btn-close position-absolute end-0 me-3 shadow-none"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="btn-close-modal"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="img-login">
+          <img src="/Login.png" alt="Login" />
+        </div>
+        <div class="form-body">
+          <form name="form" (ngSubmit)="login()">
+            <div class="mb-3 form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="loginUser"
+                name="username"
+                placeholder="Usuario"
+                [(ngModel)]="userform.username"
+              />
+            </div>
+            <div class="mb-3 form-group">
+              <input
+                type="password"
+                class="form-control"
+                id="loginPassword"
+                name="password"
+                placeholder="Contraseña"
+                [(ngModel)]="userform.password"
+              />
+            </div>
+          </form>
+          <div class="buttons">
+            <button type="submit" class="btn btn-primary" (click)="login()">
+              Login
+            </button>
+            <button
+              class="btn btn-registro mt-2"
+              (click)="redirectToRegister()"
+              data-bs-toggle="modal"
+              data-bs-target="#registerModal"
+              data-bs-dismiss="modal"
+            >
+              Crear Nuevo Usuario
+            </button>
+          </div>
+          <div *ngIf="msglogin" class="alert alert-danger mt-3">
+            {{ msglogin }}
+          </div>
+          <div *ngIf="msgSuccess" class="alert alert-success mt-3">
+            {{ msgSuccess }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

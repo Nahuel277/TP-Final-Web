@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">ReCreo</a>
+    <!-- Botón hamburguesa -->
+    <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Menú lateral -->
+    <div class="offcanvas offcanvas-start menu-lateral" tabindex="-1" id="offcanvasNavbar"
+      aria-labelledby="offcanvasNavbarLabel">
+      <!-- Cabecera del menú -->
+      <div class="offcanvas-header text-white border-bottom">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">ReCreo</h5>
+        <button type="button" class="btn-close btn-close-white shadow-none border-0" data-bs-dismiss="offcanvas"
+          aria-label="Close"></button>
+      </div>
+      <!-- Cuerpo del menú -->
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-center align-items-center text-center fs-5 flex-grow-1">
+          <li class="nav-item mx-2">
+            <a class="nav-link active" aria-current="page" [routerLink]="['/']">Home</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" [routerLink]="['cursos']">Cursos</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" [routerLink]="['nosotros']">Nosotros</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" [routerLink]="['contacto']">Contacto</a>
+          </li>
+          <div *ngIf="loginService.userLoggedIn() && loginService.isAdmin()">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/crud-curso']">Crud de Cursos</a>
+            </li>
+          </div>
+          <div *ngIf="loginService.userLoggedIn() && loginService.isAdmin()">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/crud-usuario']">Crud de Usuarios</a>
+            </li>
+          </div>
+          <div *ngIf="loginService.userLoggedIn() && loginService.isAdmin()">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/inscripcion']">Inscripcion</a>
+            </li>
+          </div>
+          <div *ngIf="loginService.userLoggedIn() && loginService.isProfe()">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/dictados']">Cursos Dictados</a>
+            </li>
+          </div>
+          <div *ngIf="loginService.userLoggedIn() && loginService.isProfe()">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/inscripciones']">Inscribir Usuarios</a>
+            </li>
+          </div>
+          <div *ngIf="loginService.userLoggedIn() && loginService.isProfe()">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/estadisticas-cursos']">Mis Estadisticas</a>
+            </li>
+          </div>
+          <div *ngIf="loginService.userLoggedIn()">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/mis-cursos']">Mis Cursos</a>
+            </li>
+          </div>
+        </ul>
+        <!-- Login -->
+        <app-login *ngIf="!loginService.userLoggedIn()"></app-login>
+
+        <!-- Logout -->
+        <div class="d-flex align-items-center justify-content-center">
+          <a *ngIf="loginService.userLoggedIn()" (click)="logout()" class="btn logout-btn">
+            {{loginService.userLogged()}} (logout)
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
