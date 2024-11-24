@@ -2,16 +2,14 @@ version: '3.8'
 
 services:
   frontend:
-    build:
-      context: ./Frontend # Asegúrate de que esta ruta sea correcta
+    image: nahuel277/frontend:latest
     ports:
       - "4200:4200"  # Asegúrate de mapear correctamente el puerto 4200
     networks:
       - my-network
 
   backend:
-    build:
-      context: ./Backend
+    image: nahuel277/backend:latest
     environment:
       - NODE_ENV=production
       - MONGO_URI=mongodb://mongo1:27017,mongo2:27017,mongo3:27017/mydb?replicaSet=myReplicaSet
