@@ -6,11 +6,9 @@ const URI = process.env.MONGO_URI;
 
 // Opciones de conexión recomendadas
 const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-  replicaSet: "myReplicaSet" // Asegúrate de que coincida con tu configuración
+    useNewUrlParser: true,
+    useUnifiedTopology: true, // Manejo de conexiones moderno
+    replicaSet: "myReplicaSet" // Asegúrate de que coincida con tu configuración
 };
 
 // Conexión a la base de datos
@@ -21,4 +19,5 @@ mongoose
 
 // Exportar la conexión
 module.exports = mongoose;
+
 
