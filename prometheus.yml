@@ -1,0 +1,26 @@
+global:
+  scrape_interval: 15s  # Intervalo de recolección de métricas
+  evaluation_interval: 15s  # Intervalo de evaluación de reglas
+
+scrape_configs:
+  # Monitoreo de servicios de contenedores Docker
+  - job_name: 'docker-containers'
+    static_configs:
+      - targets:
+          - 'backend:3000'  # Backend
+          - 'frontend:4200' # Frontend
+          - 'mongo1:27017'  # Nodo MongoDB 1
+          - 'mongo2:27018'  # Nodo MongoDB 2
+          - 'mongo3:27019'  # Nodo MongoDB 3
+
+  # Monitoreo del propio Prometheus
+  - job_name: 'prometheus'
+    static_configs:
+      - targets:
+          - 'localhost:9090'
+
+  # Monitoreo del MongoDB Exporter
+  - job_name: 'mongodb-exporter'
+    static_configs:
+      - targets:
+          - 'mongodb-exporter:9216'  # Exportador de métricas de MongoDB
