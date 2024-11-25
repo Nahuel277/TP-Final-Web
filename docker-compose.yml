@@ -65,6 +65,17 @@ services:
       - my-network
     entrypoint: /bin/sh -c "while true; do sleep 600; mongodump --host=mongo1 --port=27017 --archive=/backups/backup-$(date +%Y%m%d%H%M%S).gz --gzip; done"
 
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_CLEANUP=true   # Elimina imágenes antiguas después de actualizar
+      - WATCHTOWER_POLL_INTERVAL=60  # Intervalo de 5 minutos para verificar actualizaciones
+    networks:
+      - my-network
+
 networks:
   my-network:
 
